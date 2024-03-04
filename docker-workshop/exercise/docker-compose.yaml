@@ -1,0 +1,24 @@
+# Specify the version of the Compose file format (currently version 3)
+version: "3"
+
+# Define services section, containing configurations for individual services
+services:
+
+  # Backend service:
+  backend:
+    # Build the image for this service from the Dockerfile in the ./backend directory
+    build: ./backend
+    # Expose port 8000 on the container and map it to port 8000 on the host machine
+    ports:
+      - 8000:8000
+
+  # Frontend service:
+  frontend:
+    # Build the image for this service from the Dockerfile in the ./frontend directory
+    build: ./frontend
+    # Expose port 3000 on the container and map it to port 3000 on the host machine
+    ports:
+      - 3000:3000
+    # Ensure the frontend service starts only after the backend service is up and running
+    depends_on:
+      - backend
